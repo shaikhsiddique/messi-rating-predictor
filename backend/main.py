@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 import numpy as np
+import uvicorn
+import os
 
 app = FastAPI()
 
@@ -77,3 +79,7 @@ def predict(data: MatchInput):
     prediction = model.predict(features)[0]
     prediction = max(6.0, min(10.0, float(prediction)))
     return {"rating": round(float(prediction), 2)}
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
