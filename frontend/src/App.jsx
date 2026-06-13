@@ -197,7 +197,7 @@ export default function App() {
       competition_group_other: form.competition === "other" ? 1 : 0,
     };
     try {
-      const res = await fetch("http://localhost:8000/predict", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/predict`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
